@@ -1,4 +1,6 @@
 from aiogram import Bot, Dispatcher, executor, types
+import os
+from decouple import config
 import requests
 import logging
 
@@ -7,7 +9,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-API_TOKEN: str = '5926602129:AAFTv3Cst_TM34lTgFc7BvR-QFOrN-nWLp8'
+API_TOKEN: str = config('TOKEN')
 
 bot: Bot = Bot(token=API_TOKEN)
 dp: Dispatcher = Dispatcher(bot)
@@ -43,7 +45,7 @@ dp.register_message_handler(process_start_command, commands='start')
 dp.register_message_handler(process_help_command, commands='help')
 dp.register_message_handler(send_random_cat, commands='cat')
 dp.register_message_handler(send_dog_random, commands='dog' )
-dp.register_message_handler()
+
 
 
 if __name__ == '__main__':
