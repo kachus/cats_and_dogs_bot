@@ -21,19 +21,12 @@ async def process_start_command(message: types.Message):
 
 
 async def process_help_command(message: types.Message):
-    await message.answer('I will reply with a pic of a cutie to your text')
-
-
-async def send_echo(message: types.Message):
-    await message.reply(message.text)
-
+    await message.answer('I will reply with a pic of a cutie to your text \n you can send me /cat or /dog to see a cutie')
 
 async def send_random_cat(message: types.Message):
     cat_response = requests.get(API_CATS_URL)
     if cat_response.status_code == 200:
         cat_link = cat_response.json()['file']
-        #updates = bot.get_updates()
-
         await message.answer_photo(photo = cat_link)
     else:
         await message.reply('it had to be a pic of a cutie but something went wrong :(')
@@ -50,6 +43,7 @@ dp.register_message_handler(process_start_command, commands='start')
 dp.register_message_handler(process_help_command, commands='help')
 dp.register_message_handler(send_random_cat, commands='cat')
 dp.register_message_handler(send_dog_random, commands='dog' )
+dp.register_message_handler()
 
 
 if __name__ == '__main__':
